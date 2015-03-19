@@ -18,7 +18,7 @@
 ##  Assumes we are using `solve()` method which throws an error in the following
 ##  situations:
 ##      1: non-square matrix (i.e. not 2x2 or 10x10, etc.)
-##      2: matrix is singular
+##      2: matrix is not singular
 
 ## Tested Matrixes:
 ##  matrix(1:4,2,2)
@@ -28,6 +28,9 @@
 ##      Show, using system.time() clear signs of improvement using cached 
 ##      object versus regenerating each time.
 
+## makeCacheMatrix function creates a special a list of pointers to objects 
+## and function calls. makeCacheMatrix enables a read-through cache approach 
+## to storage of an inverted matrix.
 makeCacheMatrix <- function(x = matrix()) {
     ms <- NULL
     set <- function(y) {
@@ -42,8 +45,7 @@ makeCacheMatrix <- function(x = matrix()) {
          getSolve = getSolve)
 }
 
-
-## cacheSolve method is used to return a cached value for a given
+## cacheSolve function is used to return a cached value for a given
 ## makeCacheMatrix or generate one if not-exists. 
 ## The generated cached inverted matrix is then also available through
 ## the makeCacheMatrix object.
